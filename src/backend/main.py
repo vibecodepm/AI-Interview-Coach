@@ -1,14 +1,40 @@
-# backend/main.py
+# src/backend/main.py
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import os # Used for environment variable checks
-from typing import List, Dict 
+from typing import List, Dict
+from starlette.middleware.cors import CORSMiddleware # Import the necessary middleware
+
+# ===============================================================
+# 1. INITIALIZATION & DEPENDENCY SETUP
+# ===============================================================
 
 app = FastAPI(title="AI Interview Coach API", version="1.0.0-mvp")
 
+# ⚡️ FEATURE INTEGRATION: Apply CORS Middleware (Feature #005)
+origins = [
+    "http://localhost:3000",   # Frontend development origin
+    "http://127.0.0.1:3000",   # Common local alternative
+]
 
-# --- Global Initialization Status Check ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],     # Allows GET, POST, etc.
+    allow_headers=["*"],     # Allows any header (e.g., Content-Type)
+)
+
+
+# Initialize shared components (simulating dependency injection)
+from .evaluation_system import InterviewEvaluator, MockLLMClient # Import the core engine logic
+
+mock_llm_client = MockLLMClient()
+evaluator_service = InterviewEvaluator(llm_client=mock_llm_client)
+
+
+# ... [The rest of the file content remains unchanged] ...
+
 @app.get("/health")
 def health_check():
     return {"status": "ok", "service": "AI Interview Coach MVP", "version": "1.0.0"}
@@ -27,6 +53,10 @@ class StartInterviewRequest(BaseModel):
 
 @app.post("/api/v1/start", response_model=List[dict])
 async def start_interview(request: StartInterviewRequest):
+    """
+    Endpoint to initialize a new interview session by mock-generating 3 questions.
+    REPLACES the complex LLM call with deterministic, runnable mock data for MVP testing.
+    """
     print("--- API HIT: Running /api/v1/start endpoint ---")
     # MOCK DATA GENERATION: Hardcoding deterministic output that satisfies the type contract
     mock_questions = [
@@ -51,6 +81,10 @@ async def start_interview(request: StartInterviewRequest):
 
 @app.post("/api/v1/submit_answer")
 async def submit_answer(request: dict): 
+    """
+    Endpoint that receives a user answer and processes it through the full scoring lifecycle.
+    Returns the detailed score report using hardcoded, representative data.
+    """
     print("--- API HIT: Running /api/v1/submit_answer endpoint ---")
     # MOCK DATA GENERATION: Hardcoding one perfect, demonstrable score report
     return {
