@@ -1,0 +1,19 @@
+# Node
+node_modules/
+.next/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+.env.local
+
+# macOS
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
