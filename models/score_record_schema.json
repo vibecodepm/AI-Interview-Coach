@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "score_record_id": {
+      "type": "string",
+      "description": "Unique ID for this scoring iteration."
+    },
+    "session_metric_ref_id": {
+        "type": "string",
+        "description": "Foreign key linking back to the overall SessionMetrics."
+    },
+    "scorer_user_id": {
+        "type": "string",
+        "description": "The ID of the user/AI that performed the scoring."
+    },
+    "score_date": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date and time the scoring was finalized."
+    },
+    "rubric_scores": {
+      "type": "object",
+      "description": "Container for individual dimensional scores (1-5).",
+      "properties": {
+        "relevance": {"type": "integer", "minimum": 1, "maximum": 5, "description": "Score for Relevance."},
+        "structure": {"type": "integer", "minimum": 1, "maximum": 5, "description": "Score for Structure."},
+        "specificity": {"type": "integer", "minimum": 1, "maximum": 5, "description": "Score for Specificity."},
+        "business_impact": {"type": "integer", "minimum": 1, "maximum": 5, "description": "Score for Business Impact."},
+        "clarity": {"type": "integer", "minimum": 1, "maximum": 5, "description": "Score for Clarity."}
+      },
+      "required": ["relevance", "structure", "specificity", "business_impact", "clarity"]
+    },
+    "weighted_score_calculation": {
+        "type": "string",
+        "description": "Detailed calculation steps or methodology used to derive the overall score (e.g., 'Avg(R, S*1.5, B)')."
+    }
+  },
+  "required": ["score_record_id", "session_metric_ref_id", "scorer_user_id", "rubric_scores"]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "question_id": {
+      "type": "string",
+      "description": "Unique identifier for the question (e.g., UUID)."
+    },
+    "text": {
+      "type": "string",
+      "description": "The full text of the question."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["Technical Depth", "Product Knowledge", "Behavioral"],
+      "description": "Domain category of the question."
+    },
+    "is_open_ended": {
+        "type": "boolean",
+        "description": "True if a free-text response is expected (as opposed to multiple choice)."
+    }
+  },
+  "required": ["question_id", "text", "category"]
+}

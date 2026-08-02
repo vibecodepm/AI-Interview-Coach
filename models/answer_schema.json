@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "answer_id": {
+      "type": "string",
+      "description": "Unique identifier for the specific answer submission."
+    },
+    "question_ref_id": {
+      "type": "string",
+      "description": "Foreign key reference to the Question ID answered."
+    },
+    "user_input": {
+      "type": "string",
+      "description": "The raw text provided by the user."
+    },
+    "submission_timestamp": {
+        "type": "string",
+        "format": "date-time",
+        "description": "When the answer was submitted (ISO 8601)."
+    }
+  },
+  "required": ["answer_id", "question_ref_id", "user_input"]
+}

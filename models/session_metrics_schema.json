@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "session_metric_id": {
+      "type": "string",
+      "description": "Unique ID for the entire assessment session tracking record."
+    },
+    "candidate_user_id": {
+        "type": "string",
+        "description": "ID of the candidate being assessed."
+    },
+    "start_date": {
+        "type": "string",
+        "format": "date-time"
+    },
+    "overall_metrics": {
+      "type": "object",
+      "description": "Aggregated average scores across all scored records.",
+      "properties": {
+        "average_relevance": {"type": "number", "minimum": 1.0, "maximum": 5.0},
+        "average_structure": {"type": "number", "minimum": 1.0, "maximum": 5.0},
+        "average_specificity": {"type": "number", "minimum": 1.0, "maximum": 5.0},
+        "average_business_impact": {"type": "number", "minimum": 1.0, "maximum": 5.0},
+        "average_clarity": {"type": "number", "minimum": 1.0, "maximum": 5.0}
+      },
+      "required": ["average_relevance", "average_structure", "average_specificity", "average_business_impact", "average_clarity"]
+    },
+    "summary_score": {
+        "type": "number",
+        "description": "The final, composite score (Weighted average of overall metrics)."
+    },
+     "total_answers_scored": {
+        "type": "integer",
+        "minimum": 0
+    }
+  },
+  "required": ["session_metric_id", "candidate_user_id", "start_date", "overall_metrics"]
+}
