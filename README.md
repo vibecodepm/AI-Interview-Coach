@@ -12,7 +12,6 @@ An AI-powered interview preparation platform that generates personalized mock in
 ![Frontend](https://img.shields.io/badge/Frontend-Next.js-black)
 ![Backend](https://img.shields.io/badge/Backend-FastAPI-green)
 ![AI](https://img.shields.io/badge/AI-LLM_Ready-orange)
-![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 </div>
 
