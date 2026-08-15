@@ -412,8 +412,6 @@ Next milestone:
 
 # 👨‍💻 Author
 
-****
-
 
 
 Building AI-powered products that combine Product Thinking, AI Systems and Full-Stack Engineering.
