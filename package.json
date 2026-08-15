@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "next": "latest",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "latest"
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "postcss": "^8.5.26",
+    "tailwindcss": "^4.3.3"
   }
 }
