@@ -1,4 +1,3 @@
-// /Desktop/Hermes Projects/AI-Interview-Coach/src/services/interviewService.js
 
 /**
  * API Service Layer for all Interview Coach communications.

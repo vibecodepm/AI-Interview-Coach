@@ -1,4 +1,3 @@
-// /Desktop/Hermes Projects/AI-Interview-Coach/src/components/Landing/JobDescriptionInput.jsx
 
 import React from 'react';
 

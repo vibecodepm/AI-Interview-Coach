@@ -2,424 +2,445 @@
 
 # 🚀 AI Interview Coach
 
-### Practice Product Management Interviews with AI
+### Structured Product Management Interview Practice
 
-An AI-powered interview preparation platform that generates personalized mock interviews, evaluates answers using structured rubrics, and provides actionable feedback to help Product Managers improve interview performance.
+**Practice one question at a time. Answer like a real interview. Get evidence-based feedback.**
 
----
-
-![Status](https://img.shields.io/badge/Status-MVP-blue)
-![Frontend](https://img.shields.io/badge/Frontend-Next.js-black)
-![Backend](https://img.shields.io/badge/Backend-FastAPI-green)
-![AI](https://img.shields.io/badge/AI-LLM_Ready-orange)
+[![Status](https://img.shields.io/badge/Status-Working%20MVP-blue)](#)
+[![Frontend](https://img.shields.io/badge/Frontend-Next.js-black)](#)
+[![Backend](https://img.shields.io/badge/Backend-FastAPI-green)](#)
+[![Evaluation](https://img.shields.io/badge/Evaluation-4--Dimension%20Rubric-orange)](#)
 
 </div>
 
 ---
 
-# 🎯 Why this Project?
+## 🎯 What is AI Interview Coach?
 
-Interview preparation for Product Managers is largely subjective.
+AI Interview Coach is a working MVP for Product Managers preparing for interviews.
 
-Candidates typically:
+The product turns candidate context and a target role into a short mock interview. The candidate answers **one question at a time**, receives structured evaluation, and finishes with an interview-level readiness score.
 
-- Practice alone
-- Memorize frameworks
-- Ask friends for mock interviews
-- Receive inconsistent feedback
-- Have no objective way to measure improvement
+The core product loop is:
 
-AI Interview Coach aims to solve this problem by acting as an intelligent interview partner that provides structured, measurable and repeatable feedback.
+```text
+Candidate Context
+      ↓
+Mock Interview
+      ↓
+Question 1
+      ↓
+Candidate Answer
+      ↓
+Structured Evaluation
+      ↓
+Next Question
+      ↓
+Question 2
+      ↓
+...
+      ↓
+Interview Summary
+```
+
+The MVP is intentionally focused on validating this core loop rather than building a large interview platform.
 
 ---
 
-# ✨ Vision
+## 💡 The Problem
 
-Build an AI Interview Coach capable of:
+Product interview preparation is often subjective.
 
-- Understanding a candidate's resume
-- Understanding the target Job Description
-- Generating role-specific interview questions
-- Asking intelligent follow-up questions
-- Evaluating every answer
-- Providing actionable coaching
-- Tracking interview improvement over time
+Candidates commonly:
+
+- practice generic questions
+- memorize frameworks without practicing decision-making
+- receive inconsistent feedback
+- struggle to understand why an answer is weak
+- have no repeatable way to measure performance
+
+The product hypothesis is:
+
+> **If interview practice uses a consistent evaluation rubric and evidence-based feedback, candidates can identify and improve answer-quality gaps more effectively than with generic practice alone.**
 
 ---
 
-# 👥 Target Users
+## 👤 Target User
 
-- Associate Product Managers (APM)
-- Product Managers (PM)
-- Senior Product Managers (SPM)
-- Group Product Managers (GPM)
+The initial target user is a Product Manager preparing for interviews.
+
+The MVP is relevant to:
+
+- Associate Product Managers
+- Product Managers
+- Senior Product Managers
+- Group Product Managers
 - AI Product Managers
 - Product Analysts
 
 ---
 
-# 🚀 Current MVP
+## ✨ Working MVP
 
-Current capabilities include:
+### Onboarding
 
-- Resume input
-- Job Description input
-- Target role selection
-- Mock interview initialization
-- End-to-end Frontend ↔ Backend integration
-- FastAPI API layer
-- Modular service layer
-- Environment configuration
-- Mock interview generation
+The candidate provides:
+
+- Professional history / resume context
+- Target Job Description
+- Target role
+
+### Interview
+
+The product:
+
+- generates a short mock interview
+- presents **one question at a time**
+- shows the relevant framework / areas of depth
+- captures the candidate's answer
+- evaluates the answer
+- allows progression to the next question
+
+### Evaluation
+
+Every answer is evaluated across four dimensions:
+
+| Dimension | What it measures |
+|---|---|
+| **Relevance** | Does the answer directly address the question? |
+| **Structure** | Is the reasoning/story coherent? |
+| **Specificity** | Does the candidate demonstrate personal actions and evidence? |
+| **Business Impact** | Does the answer demonstrate a credible outcome or measurable impact? |
+
+Each dimension is scored from **0–5**.
+
+The question score is the average of the four dimensions.
+
+The interview score is the average of the **unique completed question scores**.
 
 ---
 
-# 🖥 Product Walkthrough
+## 🧪 MVP Validation
+
+The MVP was tested with deliberately different answer qualities.
+
+| Test | Answer quality | Observed result |
+|---|---|---:|
+| 1 | Extremely short / insufficient evidence | **0.0** |
+| 2 | Relevant but generic | **~2.5** |
+| 3 | Strong structured answer | **~4.3–4.4** |
+| 4 | Strong answer with business evidence | **~4.3** |
+
+The end-to-end flow was also validated:
 
 ```text
-Paste Resume
-        │
-Paste Job Description
-        │
-Select Target Role
-        │
-Start Interview
-        │
-Generate AI Questions
-        │
-Answer Questions
-        │
-Receive Structured Feedback
-        │
-Improve Interview Performance
+Q1 → Evaluation
+Q2 → Evaluation
+Q3 → Evaluation
+        ↓
+3 of 3 completed
+        ↓
+Final score = average of Q1 + Q2 + Q3
 ```
+
+Example validated result:
+
+```text
+Q1 = 0.0
+Q2 = 2.5
+Q3 = 4.4
+
+Final = 2.3 / 5
+```
+
+A particularly important failure mode was also fixed: duplicate evaluation events could previously inflate completion counts. The final implementation aggregates unique question results.
 
 ---
 
-# 🏗 System Architecture
+## 🧠 Evaluation Philosophy
+
+The product is designed around **evidence over praise**.
+
+The evaluator should not reward:
+
+- answer length by itself
+- generic confidence
+- keywords without evidence
+- invented achievements or metrics
+
+An answer such as:
+
+> "I worked with the team and launched the feature."
+
+may be relevant, but it does not by itself demonstrate strong personal ownership, decision-making, or business impact.
+
+Similarly, an answer such as:
+
+> "abc"
+
+should be capable of receiving **0**, rather than an artificially positive score.
+
+The full scoring specification is documented in [`docs/Evaluation-Framework.md`](docs/Evaluation-Framework.md).
+
+---
+
+## 🏗 System Architecture
 
 ```mermaid
 flowchart TD
 
-A[React / Next.js Frontend]
-
-A --> B[Interview Service Layer]
+A[Next.js / React Frontend]
+    --> B[Interview Service Layer]
 
 B --> C[FastAPI Backend]
 
-C --> D[Interview Evaluation Engine]
+C --> D[Interview / Question Engine]
 
-D --> E[LLM Provider]
+C --> E[Evaluation Engine]
 
-D --> F[Evaluation Rubric]
+E --> F[Four-Dimension Rubric]
 
-C --> G[Session Metrics]
+E --> G[Structured Evaluation]
+
+C --> H[Interview Session State]
+
+H --> I[Interview Summary]
 ```
 
----
-
-# 🤖 AI Workflow
-
-```text
-Resume
-
-+
-
-Job Description
-
-+
-
-Target Role
-
-↓
-
-Question Generation
-
-↓
-
-Candidate Answer
-
-↓
-
-Evaluation Engine
-
-↓
-
-Rubric Scoring
-
-↓
-
-Structured Feedback
-
-↓
-
-Improved Answer
-
-↓
-
-Performance Summary
-```
-
----
-
-# 📊 Evaluation Framework
-
-Every interview response is evaluated across five dimensions.
-
-| Dimension | Description |
-|------------|-------------|
-| Relevance | Did the answer address the question? |
-| Structure | STAR / Framework quality |
-| Specificity | Metrics, numbers and examples |
-| Business Impact | Customer & business outcomes |
-| Clarity | Conciseness and communication quality |
-
----
-
-# 📈 Product Metrics
-
-The product is designed to track:
-
-- Interview completion rate
-- Average score improvement
-- AI feedback helpfulness
-- Time to complete an interview
-- Number of follow-up questions
-- Candidate readiness score
-
----
-
-# 🛠 Technology Stack
-
-## Frontend
+### Frontend
 
 - Next.js
 - React
 - JavaScript
+- Tailwind CSS
 
-## Backend
+### Backend
 
-- FastAPI
 - Python
+- FastAPI
 - Pydantic
+- Uvicorn
 
-## AI Layer
-
-- LLM-ready evaluation engine
-- Structured scoring framework
-
-## Development
+### Development
 
 - Git
 - GitHub
 - VS Code
-- Environment Variables
+- Python virtual environment
 
 ---
 
-# 📂 Project Structure
+## 📂 Repository Structure
 
 ```text
-AI-Interview-Coach
-
+AI-Interview-Coach/
+│
 ├── docs/
-├── models/
-├── schemas/
+│   ├── AI-Workflow.md
+│   ├── Evaluation-Framework.md
+│   ├── Executive-Summary.md
+│   ├── Launch-Strategy.md
+│   ├── Market-Research.md
+│   ├── Metrics-and-Analytics.md
+│   ├── Portfolio-Case-Study.md
+│   ├── Problem-Statement.md
+│   ├── Product-Requirements-Document.md
+│   ├── Product-Roadmap.md
+│   ├── Product-Vision.md
+│   ├── Retrospective.md
+│   ├── Sprint-Journal.md
+│   ├── System-Architecture.md
+│   ├── User-Personas.md
+│   └── UX-User-Journey.md
+│
 ├── src/
 │   ├── backend/
 │   ├── components/
 │   ├── pages/
-│   └── services/
-├── CHANGELOG.md
+│   ├── services/
+│   └── styles/
+│
 ├── package.json
+├── package-lock.json
 ├── requirements.txt
+├── CHANGELOG.md
 └── README.md
 ```
 
 ---
 
-# 🚀 Local Development
+## 🚀 Run Locally
 
-Clone the repository
-
-```bash
-git clone https://github.com/vibecodepm/AI-Interview-Coach.git
-```
-
-Move into the project
-
-```bash
-cd AI-Interview-Coach
-```
-
-Install frontend dependencies
+### 1. Install frontend dependencies
 
 ```bash
 npm install
 ```
 
-Create Python environment
+### 2. Create a Python virtual environment
 
 ```bash
-python3 -m venv venv
-
-source venv/bin/activate
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
-Install backend dependencies
+### 3. Install backend dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Configure environment
+### 4. Start FastAPI
 
 ```bash
-cp .env.local.example .env.local
+python -m uvicorn src.backend.main:app --reload --port 8000
 ```
 
-Start backend
+Backend:
 
-```bash
-uvicorn src.backend.main:app --reload
+```text
+http://localhost:8000
 ```
 
-Start frontend
+Swagger:
+
+```text
+http://localhost:8000/docs
+```
+
+### 5. Start Next.js
+
+Open another terminal:
 
 ```bash
 npm run dev
 ```
 
-Application URLs
+Frontend:
 
-Frontend
-
-```
+```text
 http://localhost:3000
 ```
 
-Backend
+Both the frontend and backend need to be running for the complete interview flow.
 
+---
+
+## 📚 Product Documentation
+
+The `/docs` directory documents the product from multiple perspectives.
+
+### Product
+
+- [Product Vision](docs/Product-Vision.md)
+- [Problem Statement](docs/Problem-Statement.md)
+- [Product Requirements Document](docs/Product-Requirements-Document.md)
+- [User Personas](docs/User-Personas.md)
+- [UX User Journey](docs/UX-User-Journey.md)
+
+### AI & Evaluation
+
+- [AI Workflow](docs/AI-Workflow.md)
+- [Evaluation Framework](docs/Evaluation-Framework.md)
+- [Metrics & Analytics](docs/Metrics-and-Analytics.md)
+
+### Engineering
+
+- [System Architecture](docs/System-Architecture.md)
+
+### Product Delivery
+
+- [Product Roadmap](docs/Product-Roadmap.md)
+- [Launch Strategy](docs/Launch-Strategy.md)
+- [Sprint Journal](docs/Sprint-Journal.md)
+- [Retrospective](docs/Retrospective.md)
+
+### Portfolio
+
+- [Portfolio Case Study](docs/Portfolio-Case-Study.md)
+
+---
+
+## 🔍 What I Learned Building It
+
+The most important lesson was that a technically functional feature is not automatically a usable product.
+
+The MVP went through several iterations around:
+
+- sequential interview state
+- answer evaluation
+- insufficient-answer handling
+- score discrimination
+- duplicate result aggregation
+- final interview summary
+
+The final product loop was validated end-to-end rather than stopping at successful API responses.
+
+---
+
+## 🛣️ Next Product Iteration
+
+The highest-value next step is **evaluation calibration**, not simply adding more features.
+
+Potential next iterations:
+
+1. Build a human-rated PM interview answer dataset.
+2. Compare AI scores with experienced interviewer scores.
+3. Measure score agreement and false positives/negatives.
+4. Improve evaluation prompts/rules based on observed gaps.
+5. Personalize questions using seniority, company, role and JD context.
+6. Track improvement across repeated interview attempts.
+
+The long-term product metric is:
+
+> **Does repeated practice measurably improve interview performance?**
+
+---
+
+## ⚠️ MVP Scope & Limitations
+
+This repository represents a **working MVP**, not a production interview platform.
+
+Current limitations include:
+
+- no authentication
+- no persistent user history
+- limited question set for demonstration
+- evaluation calibration is still required against human reviewers
+- no voice interview
+- no recruiter dashboard
+- no longitudinal performance analytics
+
+These limitations are intentional boundaries of the MVP.
+
+---
+
+## 👋 About the Project
+
+This project was built to demonstrate the intersection of:
+
+**Product Management + AI Evaluation + UX + Full-Stack Product Development**
+
+The interesting part is not simply generating interview questions.
+
+It is designing and validating an end-to-end product loop where:
+
+```text
+Problem
+  ↓
+Product Hypothesis
+  ↓
+UX
+  ↓
+Evaluation Rubric
+  ↓
+Implementation
+  ↓
+Testing
+  ↓
+Iteration
+  ↓
+Working MVP
 ```
-http://localhost:8000
-```
 
-Swagger
-
-```
-http://localhost:8000/docs
-```
-
----
-
-# 🛣 Product Roadmap
-
-## ✅ Phase 1 — Foundation
-
-- Project scaffold
-- Next.js
-- FastAPI
-- Service Layer
-- Environment Configuration
-- API Integration
-
----
-
-## 🚧 Phase 2 — Interview Experience
-
-- Answer submission
-- AI evaluation
-- Structured feedback
-- Better answer rewrite
-
----
-
-## 🔜 Phase 3 — AI Enhancement
-
-- Resume PDF parsing
-- Voice interviews
-- Company-specific interview packs
-- Context memory
-- AI confidence scoring
-
----
-
-## 🌍 Phase 4 — Product Scale
-
-- User authentication
-- Interview history
-- Analytics dashboard
-- Personalized recommendations
-- Admin dashboard
-
----
-
-# 📖 Product Management Artifacts
-
-This repository is being built as a **Product Management portfolio project**, not just a coding exercise.
-
-Alongside the application, the repository will include:
-
-- Product Vision
-- Product Requirements Document (PRD)
-- User Personas
-- User Journey
-- System Architecture
-- AI Workflow
-- Evaluation Rubrics
-- Product Metrics
-- Sprint Logs
-- Release Notes
-- User Feedback
-- Product Roadmap
-
----
-
-# 🌟 Why This Project Stands Out
-
-Unlike most AI interview assistants, this project focuses on **product thinking** as much as engineering.
-
-It combines:
-
-- AI workflows
-- Structured evaluation systems
-- Product strategy
-- Full-stack development
-- User-centric design
-- Measurable success metrics
-
-The goal is to demonstrate how AI products should be designed, built and iterated—not simply how to call an LLM.
-
----
-
-# 📅 Current Status
-
-✅ MVP Vertical Slice Complete
-
-Current milestone:
-
-- Working Frontend
-- Working Backend
-- End-to-end Interview Startup Flow
-- Modular Service Layer
-- Production-ready Project Structure
-
-Next milestone:
-
-> Interactive answer evaluation with structured AI feedback.
-
----
-
-# 👨‍💻 Author
-
-
-
-Building AI-powered products that combine Product Thinking, AI Systems and Full-Stack Engineering.
-
----
-
-## ⭐ Support
-
-If you found this project interesting, consider giving it a ⭐ on GitHub.
-
-It motivates further development and helps others discover the project.
+For the detailed product story, see the [Portfolio Case Study](docs/Portfolio-Case-Study.md).

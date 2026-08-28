@@ -1,4 +1,3 @@
-// /Desktop/Hermes Projects/AI-Interview-Coach/src/components/Interview/InterviewQuestionCard.jsx
 
 import React from 'react';
 

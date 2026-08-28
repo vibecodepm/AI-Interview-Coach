@@ -8,7 +8,7 @@ AI Interview Coach
 
 Version: MVP v0.2
 
-Owner: 
+Owner: AI First Product Manager
 
 ---
 

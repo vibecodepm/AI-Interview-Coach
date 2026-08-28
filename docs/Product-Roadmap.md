@@ -2,7 +2,7 @@
 
 **Product:** AI Interview Coach
 
-**Owner:** 
+**Owner:** AI First Product Manager
 
 **Document Version:** 1.0
 
