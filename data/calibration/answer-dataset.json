@@ -1,0 +1,119 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "pm-interview-calibration-v1",
+  "status": "awaiting_human_ratings",
+  "description": "Seed calibration set for human rating before comparing model evaluations.",
+  "rating_dimensions": ["Relevance", "Structure", "Specificity", "Business Impact"],
+  "examples": [
+    {
+      "id": "cal-001",
+      "category": "behavioral_leadership",
+      "question_type": "behavioral",
+      "target_role": "Product Manager",
+      "question": "Tell me about a time you disagreed with an important stakeholder.",
+      "answer": "I disagreed with our sales lead about prioritizing a custom enterprise request. I reviewed support volume and renewal risk, proposed a smaller reusable capability, and aligned engineering and sales on a two-week discovery spike. We avoided a one-off build and converted the capability into a roadmap item.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-002",
+      "category": "behavioral_leadership",
+      "question_type": "behavioral",
+      "target_role": "Senior Product Manager",
+      "question": "Describe a product failure and what you learned.",
+      "answer": "The launch failed because we did not test onboarding with the target segment. I owned the post-launch review, mapped the activation funnel, and led a smaller experiment that removed two setup steps. Activation improved afterward, and we added segment research to our launch checklist.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-003",
+      "category": "product_sense",
+      "question_type": "product",
+      "target_role": "Product Manager",
+      "question": "How would you improve a digital wallet for first-time users?",
+      "answer": "I would first identify the highest-friction step through funnel data and user interviews. I would segment new users by intent, prioritize the largest drop-off, and test a simpler activation flow while monitoring trust, fraud, and repeat usage.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-004",
+      "category": "product_sense",
+      "question_type": "product",
+      "target_role": "AI Product Manager",
+      "question": "When should an AI product refuse to answer?",
+      "answer": "It should refuse when the request is unsafe, outside the product's evidence, or requires a high-stakes decision without adequate context. The refusal should explain the limitation and offer a safer next step.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-005",
+      "category": "strategy_prioritization",
+      "question_type": "strategy",
+      "target_role": "Senior Product Manager",
+      "question": "Tell me about a time external conditions changed your roadmap.",
+      "answer": "A regulatory change invalidated our original payments roadmap. I analyzed exposure by customer segment, proposed protecting the highest-risk flows first, aligned finance and engineering on the trade-off, and moved a lower-impact feature out of the quarter. The launch protected the committed revenue target.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-006",
+      "category": "metrics_diagnosis",
+      "question_type": "metrics",
+      "target_role": "Product Manager",
+      "question": "A marketplace's conversion rate dropped. How would you diagnose it?",
+      "answer": "I would first confirm the definition and segment the drop by platform, geography, traffic source, and funnel step. I would check for instrumentation or release changes, then form hypotheses and run the smallest diagnostic analysis before choosing an intervention.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-007",
+      "category": "execution_collaboration",
+      "question_type": "execution",
+      "target_role": "Product Manager",
+      "question": "How do you keep a cross-functional launch on track?",
+      "answer": "I establish the outcome, owners, dependencies, decision dates, and launch risks. I use a short weekly review to surface blockers, make trade-offs explicit, and escalate only decisions that require leadership input.",
+      "edge_case": null,
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-008",
+      "category": "edge_case",
+      "question_type": "behavioral",
+      "target_role": "Product Manager",
+      "question": "Tell me about a time you changed priorities.",
+      "answer": "abc",
+      "edge_case": "insufficient_answer",
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-009",
+      "category": "edge_case",
+      "question_type": "strategy",
+      "target_role": "Product Manager",
+      "question": "What did you personally do to improve the product?",
+      "answer": "We worked with the team, improved the product, launched the feature, and achieved strong results. Everyone was aligned and the customer was happy.",
+      "edge_case": "generic_without_evidence",
+      "human_ratings": null,
+      "ai_evaluation": null
+    },
+    {
+      "id": "cal-010",
+      "category": "edge_case",
+      "question_type": "behavioral",
+      "target_role": "Product Manager",
+      "question": "Describe a difficult product decision.",
+      "answer": "The context was complicated and there were many stakeholders. I carefully considered the situation and communicated the decision clearly. The team executed well and the business continued to grow.",
+      "edge_case": "long_without_concrete_evidence",
+      "human_ratings": null,
+      "ai_evaluation": null
+    }
+  ]
+}
