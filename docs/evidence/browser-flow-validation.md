@@ -18,14 +18,14 @@
 | Sequential Question 3 flow | PASS |
 | Interview summary | PASS — 3 of 3 completed, 4.1/5 overall |
 
-## Screenshots Captured in Codex Side Chat
+## Screenshot Evidence
 
-The following visual states were captured during the live browser run:
+The following PNG files were captured during the live browser run and are committed with this report:
 
-1. **Onboarding:** AI Interview Coach landing screen with Metrics-Driven Scoring, Immediate Feedback, Context Grounding, and preparation inputs.
-2. **Question 1:** Sequential interview screen showing the question, STAR framework, interviewer probes, and answer field.
-3. **Evaluation:** Submitted answer with structured score report: Relevance 4.0, Structure 3.0, Specificity 4.0, Business Impact 4.0, overall 4.1/5.
-4. **Final summary:** Interview Readiness screen showing 3 of 3 questions completed, overall 4.1/5, and dimension averages.
+1. [Onboarding](screenshots/01-onboarding.png) — AI Interview Coach landing screen with preparation inputs.
+2. [Question 1](screenshots/02-question-1.png) — Sequential interview screen with STAR framework and interviewer probes.
+3. [Evaluation](screenshots/03-evaluation.png) — Structured score report showing 4.1/5 overall and four dimension scores.
+4. [Final summary](screenshots/04-summary.png) — Interview Readiness screen showing 3 of 3 questions completed.
 
 ## Observed Summary
 
