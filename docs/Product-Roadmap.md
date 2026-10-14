@@ -169,8 +169,8 @@ These may become future standalone products.
 
 # Milestone Sequence
 
-1. **M2.1 — Contract hardening:** validated schemas, error states, and duplicate-submission handling.
-2. **M2.2 — Live provider path:** one configured provider works end-to-end with timeouts and structured-output validation.
+1. **M2.1 — Contract hardening:** ✅ Complete — validated schemas, error states, contract tests, API smoke tests, and frontend build verification.
+2. **M2.2 — Live provider path:** **Next** — one configured provider works end-to-end with timeouts and structured-output validation.
 3. **M2.3 — Calibration:** human-rated dataset, holdout evaluation, agreement report, and failure analysis.
 4. **M2.4 — Coaching quality:** improved evidence-grounded feedback and better-answer rewrites.
 5. **M2.5 — Personalization readiness:** resume/JD parsing only after evaluation reliability is measured.
