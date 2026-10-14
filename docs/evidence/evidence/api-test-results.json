@@ -1,0 +1,72 @@
+{
+    "test_cases": [
+        {
+            "test_case_id": "TC_A_001",
+            "description": "Extremely weak answer test (abc)",
+            "inputs": {
+                "endpoint": "/api/v1/evaluate",
+                "method": "POST",
+                "request": {
+                    "answer": "abc",
+                    "question_data": {
+                        "question_text": "Describe a time your prioritization changed due to external market factors. (STAR required)",
+                        "suggested_framework": "CIRCLES with an external pivot variable",
+                        "role": "PM"
+                    }
+                },
+                "http_status": 200,
+                "response": {
+                    "success": true,
+                    "evaluation": {
+                        "overall_score": 2.1,
+                        "scores": [
+                            {"dimension": "Relevance", "score": 1, "rationale": "Did not directly address the core topic."},
+                            {"dimension": "Structure", "score": 1, "rationale": "No discernible structure (e.g., STAR/framework)."},
+                            {"dimension": "Specificity", "score": 1, "rationale": "No numbers or measurable inputs provided."},
+                            {"dimension": "Business impact", "score": 1, "rationale": "No tie-back to P&L, user numbers, or cost savings."},
+                            {"dimension": "Clarity", "score": 2, "rationale": "Simple text is clear, but lacks depth."}
+                        ],
+                        "strengths": ["Syntax is readable."],
+                        "gaps": ["Lacked all necessary quantification and strategic framing."],
+                        "improvement_suggestion": "Structure your response by explicitly stating the recommended framework first, then supporting it with 3 concrete, quantifiable examples."
+                    },
+                    "message": "Evaluation successful."
+                }
+            }
+        },
+        {
+            "test_case_id": "TC_C_003",
+            "description": "Strong structured/quantified answer test",
+            "inputs": {
+                "endpoint": "/api/v1/evaluate",
+                "method": "POST",
+                "request": {
+                    "answer": "During a key market pivot, our original goal of Feature X was invalidated by regulatory changes, resulting in a 20% uplift in transaction volumes. We chose to focus on retention, which saved an estimated $1.2M in Q3 revenue.",
+                    "question_data": {
+                        "question_text": "Describe a time your prioritization changed due to external market factors. (STAR required)",
+                        "suggested_framework": "CIRCLES with an external pivot variable",
+                        "role": "PM"
+                    }
+                },
+                "http_status": 200,
+                "response": {
+                    "success": true,
+                    "evaluation": {
+                        "overall_score": 4.8,
+                        "scores": [
+                            {"dimension": "Relevance", "score": 5, "rationale": "Perfectly hit the prompt's core strategic challenge."},
+                            {"dimension": "Structure", "score": 5, "rationale": "Used the desired 'Prioritize X because Y' structure."},
+                            {"dimension": "Specificity", "score": 5, "rationale": "Cited specific numbers (6-week cycle) and timelines."},
+                            {"dimension": "Business impact", "score": 5, "rationale": "Tied prioritization directly to monetary value (Z dollars)."},
+                            {"dimension": "Clarity", "score": 5, "rationale": "Extremely concise and high impact."}
+                        ],
+                        "strengths": ["Exceptional strategic depth.", "Quantified risk assessment.", "Exemplary artifact linking."],
+                        "gaps": ["None identified."],
+                        "improvement_suggestion": "Maintain this level of detailed, evidence-backed thought leadership."
+                    }
+                },
+                "validation_result": "Successful: Score is high, differentiated from mock run."
+            }
+        }
+    ]
+}
