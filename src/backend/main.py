@@ -1,26 +1,15 @@
-"""
-AI Interview Coach MVP backend using FastAPI.
+"""FastAPI contract for the AI Interview Coach MVP."""
 
-Dependencies: fastapi, uvicorn, pydantic, python-dotenv, fastapi-users, requests
-"""
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-import os
-from pydantic import BaseModel # Ensure BaseModel is available
 
-# Local imports must point to the modified library structure
 from src.backend.evaluation_system import (
-    InterviewEvaluator, 
-    get_llm_client_by_config, 
-    LLMClientAbstract,
-    ScoreCriteriaItem,
     AnswerScoreSchema,
-    QuestionResultSchema,
+    InterviewEvaluator,
     StartInterviewRequest,
-    SubmitAnswerRequest
+    SubmitAnswerRequest,
+    get_llm_client_by_config,
 )
-
-# --- CONFIGURATION ---
 
 app = FastAPI(title="AI Interview Coach MVP", version="1.0.0")
 app.add_middleware(
@@ -31,73 +20,51 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# --- DEPENDENCY INJECTION LAYER ---
+_evaluator_instance: InterviewEvaluator | None = None
+
 
 @app.on_event("startup")
-async def startup_event():
-    """Initializes the core application service layer on startup."""
+async def startup_event() -> None:
+    global _evaluator_instance
     try:
-        # 1. Get the dynamically configured LLM Client (Mock or Ollama)
-        llm_client = get_llm_client_by_config()
-        
-        # 2. Create the reusable evaluator instance
-        global _evaluator_instance
-        _evaluator_instance = InterviewEvaluator(llm_client=llm_client)
-        print(f"✅ API Startup: Evaluator initialized with {type(llm_client).__name__} client.")
-    except Exception as e:
-        print(f"❌ FATAL API Startup Error: Could not initialize LLM Client. {e}")
-        # Crash the startup or set a global failure flag if the LLM layer is mandatory
-        global _evaluator_instance
+        _evaluator_instance = InterviewEvaluator(get_llm_client_by_config())
+    except Exception:
         _evaluator_instance = None
 
 
-# --- ENDPOINTS ---
+def evaluator_or_503() -> InterviewEvaluator:
+    if _evaluator_instance is None:
+        raise HTTPException(status_code=503, detail="Interview service is not ready")
+    return _evaluator_instance
+
 
 @app.get("/api/health")
-def read_root():
-    """Basic health check to confirm FastAPI is running."""
-    if _evaluator_instance is None:
-        raise HTTPException(status_code=503, detail="Service Unavailable: Core LLM service failed to initialize.")
-    return {"status": "Operational", "service": "AI Interview Coach API", "provider": type(_evaluator_instance._llm).__name__}
+def read_health() -> dict[str, str]:
+    evaluator = evaluator_or_503()
+    return {"status": "Operational", "service": "AI Interview Coach API", "provider": type(evaluator._llm).__name__}
+
 
 @app.post("/api/v1/start")
-async def start_interview(request: StartInterviewRequest):
-    """Endpoint to generate the initial set of questions."""
+async def start_interview(request: StartInterviewRequest) -> dict:
+    evaluator = evaluator_or_503()
     try:
-        if _evaluator_instance is None:
-             raise HTTPException(status_code=503, detail="Service not ready.")
-             
-        questions = _evaluator_instance.generate_questions(
-            resume_text=request.resume_text, 
-            jd_text=request.job_description, 
-            target_role=request.target_role
-        )
+        questions = evaluator.generate_questions(request.resume_text, request.job_description, request.target_role)
         return {"success": True, "questions": questions}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to start interview: {str(e)}")
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail="Unable to generate interview questions") from exc
+
 
 @app.post("/api/v1/submit_answer")
-async def submit_answer_endpoint(request: SubmitAnswerRequest):
-    """Endpoint to submit an answer for scoring."""
-    if _evaluator_instance is None:
-         raise HTTPException(status_code=503, detail="Service not ready.")
-
+async def submit_answer_endpoint(request: SubmitAnswerRequest) -> dict[str, bool | AnswerScoreSchema]:
+    evaluator = evaluator_or_503()
     try:
-        # SECURITY CHECK: Attempt to verify question context using the known list
-        # In a real system, we'd validate question_id against QUESTIONS list.
-        
-        score = _evaluator_instance.score_answer(
-            question=request.question_text or \"Missing Question Context\",
+        score = evaluator.score_answer(
+            question=request.question_text,
             user_answer=request.user_answer,
-            resume_text=\"(Missing Context)\", # Should ideally come from session state
-            jd_text=\"(Missing Context)\",
-            target_role=request.target_role or \"PM\"
+            resume_text=request.resume_text,
+            jd_text=request.job_description,
+            target_role=request.target_role,
         )
         return {"success": True, "score_report": score}
-
-    except Exception as e:
-        # Catches ALL errors (network, schema, heuristic, etc.)
-        raise HTTPException(status_code=500, detail=f"Failed to process answer: {str(e)}")
-
-# Global instance used to store and access the runtime-configured evaluator
-_evaluator_instance = None
+    except Exception as exc:
+        raise HTTPException(status_code=502, detail="Unable to evaluate the answer") from exc
