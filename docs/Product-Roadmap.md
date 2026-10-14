@@ -31,6 +31,9 @@ timeline
             : Answer Scoring
             : Feedback
             : Better Answer
+            : Calibration Dataset
+            : Human/AI Agreement
+            : Reliability Gates
 
     Q1 2027 : AI Intelligence
             : Resume Parser
@@ -71,10 +74,22 @@ Objectives
 - Structured scoring
 - Better answer generation
 - Interview summary
+- Human-rated calibration dataset
+- Prompt/model versioning
+- Evaluation confidence and guardrails
+- Provider error handling and observability
 
 Success Metric
 
-Average interview score improvement.
+Average interview score improvement, with human/AI adjacent agreement ≥80% before positioning scores as reliable coaching signals.
+
+Exit Criteria
+
+- 50–100 human-rated answers across core PM interview categories
+- Holdout evaluation completed
+- No critical evidence-hallucination failures
+- Zero-score precision ≥95% on deliberately insufficient answers
+- Evaluation and provider failure states are visible and recoverable
 
 ---
 
@@ -89,7 +104,11 @@ Objectives
 
 Success Metric
 
-Higher interview completion rate.
+Higher interview completion rate and improved question relevance.
+
+Prerequisite
+
+Phase 2 calibration and guardrails are complete.
 
 ---
 
@@ -132,6 +151,8 @@ User retention and NPS.
 | AI Cost | Medium | Prompt Optimization |
 | Poor Feedback Quality | High | Human Review |
 | Slow Response Time | Medium | Response Streaming |
+| Calibration failure | High | Human-rated dataset, holdout testing, and release gates |
+| Privacy or data leakage | High | Redacted logs, retention controls, and minimal storage |
 
 ---
 
@@ -143,3 +164,13 @@ User retention and NPS.
 - ATS Scanner
 
 These may become future standalone products.
+
+---
+
+# Milestone Sequence
+
+1. **M2.1 — Contract hardening:** validated schemas, error states, and duplicate-submission handling.
+2. **M2.2 — Live provider path:** one configured provider works end-to-end with timeouts and structured-output validation.
+3. **M2.3 — Calibration:** human-rated dataset, holdout evaluation, agreement report, and failure analysis.
+4. **M2.4 — Coaching quality:** improved evidence-grounded feedback and better-answer rewrites.
+5. **M2.5 — Personalization readiness:** resume/JD parsing only after evaluation reliability is measured.
