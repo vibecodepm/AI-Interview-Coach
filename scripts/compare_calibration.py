@@ -43,7 +43,7 @@ def main(dataset_path):
         pairs = []
         for example in examples:
             human = (example.get("human_ratings") or {}).get(dimension)
-            ai = (example.get("ai_evaluation") or {}).get(dimension)
+            ai = (example.get("ai_evaluation", {}).get("detailed_scores") or {}).get(dimension)
             if human is not None and ai is not None:
                 pairs.append((float(ai), float(human)))
         reports[dimension] = {
