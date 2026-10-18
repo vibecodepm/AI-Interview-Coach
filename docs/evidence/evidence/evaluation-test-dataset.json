@@ -1,0 +1,56 @@
+[
+  {
+    "test_case_id": "TC_A_001",
+    "description": "Testing extremely weak answer.",
+    "question": "Describe a time your prioritization changed due to external market factors. (STAR required)",
+    "answer": "abc",
+    "overall_score": 2.1,
+    "dimension_scores": {
+      "relevance": {"score": 1, "rationale": "Did not directly address the core topic."},
+      "structure": {"score": 1, "rationale": "No discernible structure (e.g., STAR/framework)."},
+      "specificity": {"score": 1, "rationale": "No numbers or measurable inputs provided."},
+      "business_impact": {"score": 1, "rationale": "No tie-back to P&L, user numbers, or cost savings."},
+      "clarity": {"score": 2, "rationale": "Simple text is clear, but lacks depth."}
+    },
+    "strengths": ["Syntax is readable."],
+    "gaps": ["Lacked all necessary quantification and strategic framing."],
+    "pass_fail": "PASS",
+    "observations": "Score successfully differentiates from baseline by penalizing lack of depth."
+  },
+  {
+    "test_case_id": "TC_B_002",
+    "description": "Testing generic but relevant answer.",
+    "question": "Describe a time your prioritization changed due to external market factors. (STAR required)",
+    "answer": "I think we need a strategic pivot because the market needs better payments integration.",
+    "overall_score": 3.5,
+    "dimension_scores": {
+      "relevance": {"score": 4, "rationale": "The topic was correct."},
+      "structure": {"score": 3, "rationale": "Was organized but missing a clear framework banner."},
+      "specificity": {"score": 2, "rationale": "Used appropriate buzzwords but failed to back them up with examples."},
+      "business_impact": {"score": 3, "rationale": "Identified a business area, but not a measurable impact formula."},
+      "clarity": {"score": 3, "rationale": "The overall message was clear enough to follow."}
+    },
+    "strengths": ["Solid overall approach to the problem."],
+    "gaps": ["Must anchor every claim with verifiable metrics (e.g., 'increased retention by 15%')."],
+    "pass_fail": "PASS",
+    "observations": "Score is materially higher than TC_A, confirming the ability to reward basic relevance."
+  },
+  {
+    "test_case_id": "TC_C_003",
+    "description": "Testing strong structured/quantified answer.",
+    "question": "Describe a time your prioritization changed due to external market factors. (STAR required)",
+    "answer": "During a key market pivot, our original goal of Feature X was invalidated by regulatory changes, resulting in a 20% uplift in transaction volumes. We chose to focus on retention, which saved an estimated $1.2M in Q3 revenue.",
+    "overall_score": 4.8,
+    "dimension_scores": {
+      "relevance": {"score": 5, "rationale": "Perfectly hit the prompt's core strategic challenge."},
+      "structure": {"score": 5, "rationale": "Used the desired 'Prioritize X because Y' structure."},
+      "specificity": {"score": 5, "rationale": "Cited specific numbers (6-week cycle) and timelines."},
+      "business_impact": {"score": 5, "rationale": "Tied prioritization directly to monetary value (Z dollars)."},
+      "clarity": {"score": 5, "rationale": "Extremely concise and high impact."}
+    },
+    "strengths": ["Exceptional strategic depth.", "Quantified risk assessment.", "Exemplary artifact linking."],
+    "gaps": ["None identified."],
+    "pass_fail": "PASS",
+    "observations": "Achieved the maximum score, confirming the evaluation's ability to accurately reward maximum impact and rigor."
+  }
+]

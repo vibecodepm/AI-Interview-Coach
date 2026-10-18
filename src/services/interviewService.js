@@ -30,7 +30,8 @@ export async function startInterview(payload) {
             throw new Error(`HTTP error ${response.status}. Backend message parsed: ${errorText}`);
         }
 
-        return await response.json();
+        const data = await response.json();
+        return data.questions || [];
 
     } catch (err) {
         console.error("Interview Service Failure:", err);
@@ -58,9 +59,11 @@ export async function submitAnswer(payload) {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error ${response.status}. Check backend logs.`);
+            const errorText = await response.text();
+            throw new Error(`HTTP error ${response.status}: ${errorText}`);
         }
-        return await response.json();
+        const data = await response.json();
+        return data.score_report;
 
     } catch (err) {
          console.error("Answer Submission Failure:", err);

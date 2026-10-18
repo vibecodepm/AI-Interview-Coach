@@ -75,6 +75,8 @@ export default function OnboardingPage() {
         suggested_framework: currentQuestion.suggested_framework,
         user_answer: answer,
         target_role: targetRole,
+        resume_text: resumeContent,
+        job_description: jobDescription,
       });
 
       setEvaluation(data);
