@@ -12,6 +12,7 @@ from pydantic import BaseModel, Field, ValidationError
 
 DIMENSIONS = ("Relevance", "Structure", "Specificity", "Business Impact")
 DimensionName = Literal["Relevance", "Structure", "Specificity", "Business Impact"]
+EVALUATION_PROMPT_VERSION = "evaluation-v3"
 
 
 class ScoreCriteriaItem(BaseModel):
@@ -135,7 +136,7 @@ class MockLLMClient(LLMClientAbstract):
                 strengths=["Shows a clear decision and relevant context."],
                 improvements=["Make the trade-off and measurable result more explicit."],
             ),
-            improved_answer_rewrite="Rewrite the answer using the requested framework while preserving only evidence supplied by the candidate.",
+            improved_answer_rewrite="Rewrite the answer using the requested framework while preserving only evidence supplied by the candidate. Add [the missing metric or outcome] where evidence is missing.",
             confidence="medium",
         )
 
@@ -231,12 +232,15 @@ Dimensions:
 - Relevance: whether the answer directly responds to the question.
 - Structure: whether it has a coherent story or reasoning flow appropriate to the question.
 - Specificity: concrete personal actions, decisions, constraints, stakeholders, or evidence.
-- Business Impact: a stated customer, business, operational, or measurable outcome.
+- Business Impact: a stated customer, business, operational, or measurable outcome. A process, decision, launch, or stakeholder agreement is not an outcome by itself.
 
-Evidence rules: do not infer achievements, metrics, or outcomes not stated in the answer. Do not reward length, generic language, or confidence alone. A stated process without an outcome should receive a low Business Impact score.
+Evidence rules: do not infer achievements, metrics, or outcomes not stated in the answer. Do not reward length, generic language, or confidence alone. A stated process without an outcome should receive a low Business Impact score. For every dimension justification, cite or clearly describe evidence from the answer; if evidence is missing, say so explicitly.
+
+Coaching rules: feedback must be actionable and specific to this answer. The improved_answer_rewrite must preserve the candidate's facts, actions, stakeholders, and outcomes without adding facts. Never invent metrics, percentages, dates, customer reactions, revenue, or business results. When a stronger answer needs missing evidence, use a bracketed prompt such as [add the measured retention change] rather than making up a value. The rewrite should improve structure and clarity, not silently upgrade the score.
 
 Question: {clean_text(question)}
 Answer: {clean_text(user_answer)}
 Resume context (use only for relevance; do not invent evidence): {clean_text(resume_text)}
 Job-description context (use only for relevance; do not invent evidence): {clean_text(jd_text)}"""
-        return self._llm.call_structured(prompt, target_schema=AnswerScoreSchema)
+        result = self._llm.call_structured(prompt, target_schema=AnswerScoreSchema)
+        return result

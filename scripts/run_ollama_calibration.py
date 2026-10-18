@@ -16,6 +16,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT / "src" / "backend"))
 
 from evaluation_system import (  # noqa: E402
+    EVALUATION_PROMPT_VERSION,
     InterviewEvaluator,
     get_llm_client_by_config,
     insufficient_answer,
@@ -26,7 +27,7 @@ def serialize_evaluation(result, provider="ollama"):
     return {
         "provider": provider,
         "model": os.getenv("OLLAMA_MODEL", "llama3.1") if provider == "ollama" else None,
-        "prompt_version": "evaluation-v2",
+        "prompt_version": EVALUATION_PROMPT_VERSION,
         "evaluated_at": datetime.now(timezone.utc).isoformat(),
         "overall_score": result.overall_score,
         "detailed_scores": {
