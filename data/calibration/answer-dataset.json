@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "dataset_id": "pm-interview-calibration-v1",
-  "status": "seed_baseline_complete_not_released",
+  "status": "awaiting_calibration_analysis",
   "description": "Ten-example seed calibration baseline with human ratings and frozen evaluation-v2 live-model outputs; not sufficient for a calibrated release.",
   "rating_dimensions": [
     "Relevance",
@@ -27,8 +27,8 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:16:48.806582+00:00",
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:04:32.902743+00:00",
         "overall_score": 3.5,
         "detailed_scores": {
           "Relevance": 5.0,
@@ -37,21 +37,22 @@
           "Business Impact": 3.0
         },
         "justifications": {
-          "Relevance": "The answer directly addresses the prompt by describing a disagreement with an important stakeholder (sales lead).",
-          "Structure": "The answer follows a clear narrative structure: conflict -> analysis/proposal -> resolution. It is concise and easy to follow.",
-          "Specificity": "It mentions specific actions (reviewed support volume, renewal risk, proposed a smaller reusable capability, aligned engineering and sales) and a specific outcome (two-week discovery spike).",
-          "Business Impact": "The impact is stated as avoiding a 'one-off build' and converting it to a 'roadmap item,' which implies efficiency and strategic alignment, but lacks hard metrics."
+          "Relevance": "The answer directly addresses the prompt by describing a disagreement with a stakeholder (sales lead).",
+          "Structure": "The answer follows a clear narrative flow: conflict (disagreement), action (reviewing data, proposing alternative), and resolution (alignment and outcome).",
+          "Specificity": "The answer mentions specific actions (reviewed support volume and renewal risk, proposed a smaller reusable capability, aligned engineering and sales) and stakeholders (sales lead, engineering, sales).",
+          "Business Impact": "The outcome stated is avoiding a one-off build and converting the capability into a roadmap item. While this is a positive process outcome, it lacks a stated measurable business outcome (e.g., saved engineering hours, improved future sales velocity)."
         },
         "feedback": {
           "strengths": [
-            "Clearly identifies the conflict and the stakeholders involved.",
-            "Demonstrates a structured approach to conflict resolution (analysis -> proposal -> alignment).",
-            "Shows strategic thinking by pushing for a reusable capability over a one-off build."
+            "The candidate clearly identifies the conflict and the steps taken to resolve it.",
+            "The candidate demonstrates a data-driven approach by referencing 'support volume and renewal risk' to support their disagreement."
           ],
           "improvements": [
-            "Could benefit from quantifying the risk avoided or the value gained by converting it to a roadmap item (e.g., 'which saved X engineering hours' or 'which addressed Y% of renewal risk')."
+            "The Business Impact could be strengthened by quantifying the benefit of avoiding the one-off build (e.g., 'saving X engineering weeks' or 'allowing the team to focus on Y strategic goal').",
+            "The structure is good, but explicitly stating the initial risk of the custom build (e.g., 'which would have delayed Feature Z') could heighten the stakes."
           ]
         },
+        "improved_answer_rewrite": "I disagreed with our sales lead regarding the prioritization of a custom enterprise request. The request required a one-off build, which I felt was risky. I reviewed the existing support volume and renewal risk data, which showed that a custom build would divert resources from core stability. Instead, I proposed developing a smaller, reusable capability. I then aligned engineering and sales on a two-week discovery spike to validate this approach. By doing this, we successfully avoided the one-off build and converted the capability into a permanent roadmap item.",
         "confidence": "high"
       }
     },
@@ -72,33 +73,33 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:17:06.628276+00:00",
-        "overall_score": 3.5,
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:04:45.333119+00:00",
+        "overall_score": 3.2,
         "detailed_scores": {
           "Relevance": 5.0,
-          "Structure": 4.0,
-          "Specificity": 3.5,
-          "Business Impact": 3.0
+          "Structure": 3.5,
+          "Specificity": 3.0,
+          "Business Impact": 2.5
         },
         "justifications": {
-          "Relevance": "The answer directly addresses the prompt by describing a product failure and the subsequent learning.",
-          "Structure": "The structure is clear: Problem (failure due to lack of testing) -> Action (owned review, mapped funnel, led experiment) -> Result/Learning (activation improved, added research to checklist).",
-          "Specificity": "It mentions specific actions (mapping activation funnel, removing two setup steps) and a specific learning (adding segment research to checklist), but lacks detail on the 'target segment' or the nature of the failure itself.",
-          "Business Impact": "It states a measurable outcome ('Activation improved afterward'), but does not quantify this improvement (e.g., by X% or reaching Y metric), which limits the impact score."
+          "Relevance": "The answer directly addresses the prompt by describing a product failure (launch failure) and the subsequent learning.",
+          "Structure": "The structure is clear: Problem -> Action Taken -> Result -> Learning. It flows logically, though the transition from 'failure' to 'learning' could be slightly more explicit.",
+          "Specificity": "The answer is moderately specific, mentioning 'target segment,' 'activation funnel,' and 'removing two setup steps.' However, it lacks detail on the specific segment, the nature of the onboarding failure, or the constraints encountered.",
+          "Business Impact": "The answer states 'Activation improved afterward,' which is a measurable outcome, but it lacks context on the magnitude of that improvement or the business significance of the activation rate change."
         },
         "feedback": {
           "strengths": [
-            "Clear ownership demonstrated in the post-launch review.",
-            "Identified a specific, actionable learning (adding segment research to the launch checklist).",
-            "Demonstrated a clear iterative loop: Failure -> Analysis -> Experimentation -> Improvement."
+            "The candidate clearly identifies the root cause of the failure (lack of testing with the target segment).",
+            "The candidate demonstrates ownership by stating they 'owned the post-launch review.'",
+            "The candidate shows a clear learning loop by implementing a change (adding segment research to the launch checklist)."
           ],
           "improvements": [
-            "Quantify the improvement in activation (e.g., 'Activation improved by 15%').",
-            "Provide more context on the 'target segment' to ground the failure in reality.",
-            "Elaborate slightly more on the initial failure state before the experiment."
+            "The answer needs more specificity regarding the 'target segment' and the nature of the onboarding failure itself.",
+            "The impact statement ('Activation improved afterward') is too vague; it needs quantification or a clearer description of the business consequence of that improvement, e.g., [add the measured increase in activation rate] or [add the resulting impact on user retention]."
           ]
         },
+        "improved_answer_rewrite": "The launch failed because we did not adequately test the onboarding flow with our target segment. I owned the post-launch review, where I mapped the activation funnel to pinpoint the drop-off. Based on this, I led a smaller experiment that removed two setup steps from the onboarding process. Following this change, activation improved, and as a permanent process improvement, we added mandatory segment research to our launch checklist to prevent recurrence.",
         "confidence": "high"
       }
     },
@@ -119,31 +120,32 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:16:24.744696+00:00",
-        "overall_score": 3.5,
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:04:58.052222+00:00",
+        "overall_score": 3.2,
         "detailed_scores": {
           "Relevance": 5.0,
           "Structure": 4.0,
-          "Specificity": 3.0,
+          "Specificity": 2.5,
           "Business Impact": 3.0
         },
         "justifications": {
           "Relevance": "The answer directly addresses the prompt by outlining a strategy to improve a digital wallet for first-time users.",
-          "Structure": "The answer follows a logical, phased approach: Identify -> Segment/Prioritize -> Test/Monitor.",
-          "Specificity": "It mentions specific methods (funnel data, user interviews, segmentation, A/B testing) but lacks concrete examples of the friction points or specific actions taken.",
-          "Business Impact": "It mentions monitoring 'trust, fraud, and repeat usage,' which are relevant outcomes, but does not quantify the expected improvement or state a specific business goal."
+          "Structure": "The answer follows a logical flow: Identify friction -> Segment -> Prioritize -> Test/Monitor. This is a coherent problem-solving structure.",
+          "Specificity": "The answer mentions 'funnel data' and 'user interviews' (methods), but lacks concrete personal actions, specific constraints, or detailed stakeholder involvement. It is high-level.",
+          "Business Impact": "The answer mentions monitoring 'trust, fraud, and repeat usage,' which are outcomes, but it does not state a specific, measurable business outcome achieved or targeted (e.g., 'reducing drop-off by X%')."
         },
         "feedback": {
           "strengths": [
             "The answer demonstrates a strong, data-driven approach by starting with funnel analysis and user interviews.",
-            "The proposed steps (segmentation, prioritization, testing) show a mature product thinking process."
+            "The proposed steps (segmentation, prioritization, A/B testing) are appropriate for product improvement."
           ],
           "improvements": [
-            "The answer would be stronger by providing a concrete example of a 'highest-friction step' in a digital wallet (e.g., KYC verification, linking a bank account).",
-            "It needs to tie the proposed changes to a measurable business goal (e.g., 'reduce activation drop-off by X%' or 'increase 7-day retention by Y%')."
+            "The answer needs more specificity regarding the 'highest-friction step'\u2014what specific steps in the wallet onboarding process would you investigate?",
+            "To improve the Business Impact score, specify what success looks like beyond monitoring; for example, 'aiming to increase successful activation rate by X%' or 'reducing initial fraud attempts by Y%.'"
           ]
         },
+        "improved_answer_rewrite": "I would begin by analyzing funnel data to pinpoint the highest-friction step in the first-time user journey, complementing this with qualitative insights from user interviews. Next, I would segment new users based on their stated intent to better understand their needs. I would then prioritize the largest drop-off point and design and test a simplified activation flow. During testing, we would rigorously monitor key metrics, specifically focusing on initial trust signals, fraud rates, and repeat usage to ensure the simplification drives measurable adoption.",
         "confidence": "high"
       }
     },
@@ -164,31 +166,32 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:17:24.679461+00:00",
-        "overall_score": 3.0,
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:05:10.284070+00:00",
+        "overall_score": 2.5,
         "detailed_scores": {
           "Relevance": 5.0,
-          "Structure": 4.0,
-          "Specificity": 2.0,
-          "Business Impact": 3.0
+          "Structure": 3.0,
+          "Specificity": 1.0,
+          "Business Impact": 2.0
         },
         "justifications": {
-          "Relevance": "The answer directly addresses the prompt: 'When should an AI product refuse to answer?'",
-          "Structure": "The answer is concise and logically structured, presenting three clear conditions for refusal.",
-          "Specificity": "The answer is very high-level. It mentions 'unsafe,' 'outside the product's evidence,' and 'high-stakes decision,' but provides no concrete examples, constraints, or stakeholder considerations.",
-          "Business Impact": "It implies a positive impact by stating the refusal should 'offer a safer next step,' which is a basic operational safeguard, but no measurable outcome is provided."
+          "Relevance": "The answer directly addresses the prompt, 'When should an AI product refuse to answer?'",
+          "Structure": "The answer is brief and lists three conditions, providing a basic structure, but lacks a detailed flow or elaboration on the implications of each condition.",
+          "Specificity": "The answer is entirely abstract. It mentions 'unsafe,' 'outside the product's evidence,' and 'high-stakes decision without adequate context,' but provides no concrete examples of what these mean in practice, no specific stakeholders, and no personal actions.",
+          "Business Impact": "The answer mentions the *action* of offering a 'safer next step,' but it does not state a measurable business, customer, or operational outcome resulting from this refusal strategy."
         },
         "feedback": {
           "strengths": [
-            "Directly answers the core question with clear, high-level criteria."
+            "The answer correctly identifies three critical categories for refusal: safety, scope limitation, and context dependency."
           ],
           "improvements": [
-            "Lacks specificity; needs concrete examples for each refusal condition (e.g., what constitutes 'unsafe' or 'high-stakes').",
-            "Could elaborate on the 'safer next step' to demonstrate product thinking (e.g., 'redirect to human agent' or 'provide a disclaimer')."
+            "The answer needs concrete examples for each refusal condition (e.g., what constitutes 'unsafe' or 'high-stakes').",
+            "To improve structure, elaborate on the *process* of refusal\u2014how the explanation and next step are formulated and delivered to the user."
           ]
         },
-        "confidence": "high"
+        "improved_answer_rewrite": "An AI product should refuse to answer when the request falls into one of three categories: 1) Safety violations (e.g., requests for illegal or harmful content); 2) Scope limitations (i.e., the request requires information outside the product's trained evidence base); or 3) High-stakes decision-making where critical context is missing. When refusing, the system must clearly explain the specific limitation (e.g., 'I cannot provide medical advice') and proactively offer a safer, actionable next step, such as directing the user to a human expert or a verified resource.",
+        "confidence": "medium"
       }
     },
     {
@@ -208,8 +211,8 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:17:38.565407+00:00",
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:05:22.980260+00:00",
         "overall_score": 3.5,
         "detailed_scores": {
           "Relevance": 5.0,
@@ -218,22 +221,22 @@
           "Business Impact": 3.0
         },
         "justifications": {
-          "Relevance": "The answer directly addresses the prompt by describing a time an external condition (regulatory change) forced a roadmap change.",
-          "Structure": "The answer follows a clear narrative structure: Problem (regulatory change) -> Action (analysis, proposal, alignment, trade-off) -> Result (protected revenue target).",
-          "Specificity": "It mentions specific actions (analyzed exposure by customer segment, aligned finance and engineering, moved a lower-impact feature) but lacks deep detail on the regulatory change, the specific segments, or the nature of the trade-off.",
-          "Business Impact": "It states a measurable outcome ('protected the committed revenue target'), which is good, but the impact is stated without context on the magnitude of the revenue or the severity of the regulatory risk."
+          "Relevance": "The answer directly addresses the prompt by describing a time an external condition (regulatory change) altered the roadmap.",
+          "Structure": "The answer follows a clear narrative flow: Problem (regulatory change) -> Analysis/Action (analyzed exposure, proposed protection) -> Stakeholder Alignment (aligned finance and engineering) -> Outcome (moved feature, protected revenue target).",
+          "Specificity": "The answer mentions specific actions (analyzed exposure by customer segment, proposed protecting highest-risk flows, moved a lower-impact feature) and stakeholders (finance and engineering), but lacks detail on the nature of the regulatory change or the specific customer segments.",
+          "Business Impact": "The answer states the outcome was 'The launch protected the committed revenue target.' This is a stated outcome, but it lacks detail on the magnitude of the revenue target or the risk that was mitigated, making the impact somewhat vague."
         },
         "feedback": {
           "strengths": [
-            "Directly answers the prompt with a clear STAR-like structure.",
-            "Demonstrates cross-functional collaboration (Finance and Engineering).",
-            "Clearly states a positive business outcome (protected revenue target)."
+            "The candidate clearly identifies the external trigger (regulatory change) and outlines a logical, multi-step response process (analysis, prioritization, alignment).",
+            "The candidate successfully ties the actions taken to a measurable outcome (protecting the committed revenue target)."
           ],
           "improvements": [
-            "Needs more specificity regarding the external condition (the regulatory change) and the customer segments involved.",
-            "Could elaborate more on the trade-off decision to show the complexity of the prioritization process."
+            "Increase specificity by describing the nature of the regulatory change and the specific customer segments identified as high-risk.",
+            "Elaborate slightly on the trade-off discussed with finance and engineering to show the complexity of the decision, rather than just stating alignment occurred."
           ]
         },
+        "improved_answer_rewrite": "A regulatory change invalidated our original payments roadmap. I first analyzed the exposure across different customer segments to quantify the risk. Based on this analysis, I proposed prioritizing the protection of the highest-risk flows. I then aligned Finance and Engineering on the necessary trade-off, which involved moving a lower-impact feature out of the current quarter. This revised launch plan successfully protected our committed revenue target.",
         "confidence": "high"
       }
     },
@@ -254,32 +257,33 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:18:07.623096+00:00",
-        "overall_score": 3.0,
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:05:39.069189+00:00",
+        "overall_score": 2.5,
         "detailed_scores": {
           "Relevance": 5.0,
-          "Structure": 4.0,
-          "Specificity": 2.5,
+          "Structure": 3.5,
+          "Specificity": 2.0,
           "Business Impact": 2.0
         },
         "justifications": {
           "Relevance": "The answer directly addresses the prompt by outlining a diagnostic process for a conversion rate drop.",
-          "Structure": "The answer follows a logical, phased approach: confirmation/segmentation -> technical checks -> hypothesis generation -> small-scale testing/intervention.",
-          "Specificity": "The answer lists good diagnostic buckets (platform, geography, traffic source, funnel step) and actions (check instrumentation, form hypotheses), but lacks concrete examples of *how* the diagnosis would proceed or what specific data points would be examined.",
-          "Business Impact": "The answer describes the diagnostic process but does not mention any potential business outcomes, hypotheses related to user behavior, or measurable impact of the drop itself."
+          "Structure": "The answer follows a logical flow: confirmation/segmentation -> technical checks -> hypothesis generation -> small-scale testing. This is a coherent diagnostic structure.",
+          "Specificity": "The answer lists general diagnostic steps (segment by platform, geography, traffic source, funnel step, check instrumentation/releases) but lacks concrete examples of *how* the candidate would execute these steps or what specific tools they would use.",
+          "Business Impact": "The answer describes diagnostic *processes* (segmenting, testing hypotheses) but does not state any measurable customer, business, or operational outcome that would result from the diagnosis."
         },
         "feedback": {
           "strengths": [
-            "The answer provides a structured, methodical approach to problem-solving, which is appropriate for a diagnostic question.",
-            "It correctly prioritizes foundational checks (definition, segmentation, instrumentation) before jumping to solutions."
+            "The answer provides a sound, structured, and logical diagnostic framework (segmentation, technical checks, hypothesis testing).",
+            "It correctly prioritizes confirming the scope of the problem before jumping to solutions."
           ],
           "improvements": [
-            "The answer needs more specificity. Instead of just listing segmentation buckets, it should describe *what* the PM would look for within those segments (e.g., 'If the drop is only on mobile iOS, I'd check recent app updates or specific UI changes').",
-            "It needs to connect the diagnosis to potential business hypotheses (e.g., 'Hypothesis: The checkout flow is broken for users from Source X')."
+            "The answer is too high-level. To improve, the candidate needs to add specificity by naming tools or specific hypotheses they would test (e.g., 'I would check if the checkout button load time increased on mobile devices in the EU').",
+            "The answer lacks any mention of the *goal* of the diagnosis beyond finding the cause; linking the diagnosis to a desired outcome would strengthen the response."
           ]
         },
-        "confidence": "high"
+        "improved_answer_rewrite": "I would start by confirming the definition of the conversion rate and segmenting the drop across key dimensions: platform (web/iOS/Android), geography, traffic source, and specific funnel step. Next, I would check for recent instrumentation changes or A/B test releases that might correlate with the drop. Based on this initial data, I would form a few high-probability hypotheses\u2014for example, 'The drop is due to increased friction on the payment page for mobile users in Germany.' I would then run the smallest possible diagnostic analysis, such as isolating traffic from a single source to see if the drop is localized, before deciding on a targeted intervention.",
+        "confidence": "medium"
       }
     },
     {
@@ -299,31 +303,32 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:18:24.382216+00:00",
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:05:53.379252+00:00",
         "overall_score": 3.0,
         "detailed_scores": {
           "Relevance": 5.0,
           "Structure": 4.0,
           "Specificity": 2.0,
-          "Business Impact": 2.0
+          "Business Impact": 3.0
         },
         "justifications": {
-          "Relevance": "The answer directly addresses the question of how to keep a cross-functional launch on track.",
-          "Structure": "The answer presents a clear, logical process (establish -> review -> escalate).",
-          "Specificity": "The answer is high-level and lacks concrete examples of actions, stakeholders, or specific constraints encountered.",
-          "Business Impact": "The answer describes process management (surfacing blockers, making trade-offs) but does not state any measurable customer, business, or operational outcomes resulting from this process."
+          "Relevance": "The answer directly addresses the question of how to keep a cross-functional launch on track by outlining a process.",
+          "Structure": "The answer presents a clear, logical sequence of actions: establishing parameters, running reviews, and escalating issues. The flow is coherent.",
+          "Specificity": "The answer is high-level and lacks concrete examples of actions, stakeholders, or constraints. It describes a general process rather than a specific application of it.",
+          "Business Impact": "The answer mentions surfacing blockers and making trade-offs explicit, which implies risk mitigation, but it does not state a measurable outcome or business result of this process."
         },
         "feedback": {
           "strengths": [
-            "Provides a clear, actionable framework for launch management (defining outcomes, owners, risks).",
-            "Focuses on proactive risk management and decision-making cadence."
+            "The candidate clearly outlines the necessary foundational elements for launch management (outcomes, owners, dependencies, risks).",
+            "The proposed mechanism of a short weekly review is a practical, actionable step."
           ],
           "improvements": [
-            "Needs concrete examples of how these steps were applied (e.g., 'When dependency X was delayed by Y team, I facilitated a trade-off between scope A and timeline B').",
-            "Must connect the process to a measurable outcome or business goal."
+            "The answer needs concrete examples. Instead of just stating 'I use a short weekly review,' describe a time this review was critical and what specific trade-off was made.",
+            "To improve Business Impact, connect the process to an outcome. For example, 'This process helped us avoid [specific negative outcome] or achieve [specific positive outcome].'"
           ]
         },
+        "improved_answer_rewrite": "To keep a cross-functional launch on track, I first establish clear outcomes, assign owners, map out dependencies, set decision dates, and document launch risks. I then run a short weekly review where the primary goal is to surface blockers and make trade-offs explicit across teams. For instance, [describe a specific trade-off made during a review, e.g., delaying a non-critical feature to meet the core launch date]. I escalate only those decisions that require leadership input, ensuring alignment without creating unnecessary bottlenecks.",
         "confidence": "medium"
       }
     },
@@ -344,8 +349,8 @@
       "ai_evaluation": {
         "provider": "deterministic_insufficient_answer_guard",
         "model": null,
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:18:26.321157+00:00",
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:05:53.382734+00:00",
         "overall_score": 0.0,
         "detailed_scores": {
           "Relevance": 0.0,
@@ -367,6 +372,7 @@
             "Include a concrete result or measurable outcome."
           ]
         },
+        "improved_answer_rewrite": "",
         "confidence": "low"
       }
     },
@@ -387,29 +393,30 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:18:41.006781+00:00",
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:06:05.871964+00:00",
         "overall_score": 1.5,
         "detailed_scores": {
           "Relevance": 3.0,
-          "Structure": 2.0,
+          "Structure": 1.0,
           "Specificity": 0.5,
-          "Business Impact": 1.0
+          "Business Impact": 0.5
         },
         "justifications": {
-          "Relevance": "The answer addresses the prompt by mentioning product improvement and launching a feature, which is relevant.",
-          "Structure": "The structure is very weak, consisting of a list of vague actions ('worked with the team, improved the product, launched the feature') without a clear narrative flow.",
-          "Specificity": "The answer lacks any concrete personal actions, decisions, constraints, or stakeholders. It is entirely generic.",
-          "Business Impact": "The outcomes ('achieved strong results,' 'customer was happy') are stated but are completely unquantified and lack any measurable evidence."
+          "Relevance": "The answer directly addresses the prompt by mentioning improving and launching a feature.",
+          "Structure": "The structure is extremely weak, consisting of a list of vague actions ('worked with the team, improved the product, launched the feature') without a clear narrative flow.",
+          "Specificity": "The answer lacks any concrete personal actions, decisions, constraints, or stakeholders. It uses generic terms like 'We worked with the team.'",
+          "Business Impact": "The answer states 'achieved strong results' and 'the customer was happy,' but provides no measurable outcome, making the impact statement unsubstantiated."
         },
         "feedback": {
           "strengths": [
-            "The answer acknowledges that work was done on the product and a feature was launched."
+            "The candidate acknowledged the core elements of the request: improvement, launch, and positive results."
           ],
           "improvements": [
-            "The answer is too vague and lacks any personal ownership. It needs to detail *what* the candidate specifically did (e.g., 'I defined the MVP scope,' 'I ran A/B tests on X'), what the constraints were, and what the measurable outcome was (e.g., 'resulting in a 15% increase in adoption')."
+            "The answer is too vague. The candidate must detail *what* they personally did (specific actions), *how* they did it (process/decisions), and *what* the measurable outcome was (business impact). Avoid generic statements like 'strong results' or 'customer was happy' without evidence."
           ]
         },
+        "improved_answer_rewrite": "I personally drove the improvement of the product by [describe the specific problem/area]. My specific action was [describe a concrete action taken, e.g., leading the discovery phase, defining the MVP scope, or iterating on the design]. This led to the launch of [feature name], and the resulting outcome was [state the measurable outcome, e.g., a reduction in X by Y% or an increase in Z by W%].",
         "confidence": "high"
       }
     },
@@ -430,30 +437,31 @@
       "ai_evaluation": {
         "provider": "ollama",
         "model": "gemma4:latest",
-        "prompt_version": "evaluation-v2",
-        "evaluated_at": "2026-10-15T17:18:59.832603+00:00",
-        "overall_score": 2.5,
+        "prompt_version": "evaluation-v3",
+        "evaluated_at": "2026-10-18T08:06:20.453700+00:00",
+        "overall_score": 1.5,
         "detailed_scores": {
           "Relevance": 3.0,
-          "Structure": 2.5,
-          "Specificity": 1.0,
-          "Business Impact": 2.0
+          "Structure": 2.0,
+          "Specificity": 0.5,
+          "Business Impact": 1.0
         },
         "justifications": {
-          "Relevance": "The answer addresses the prompt by describing a difficult decision, but it lacks the necessary detail to be truly compelling or evaluated deeply.",
-          "Structure": "The structure is very basic: context -> action -> result. It lacks a clear narrative arc or deep reasoning flow.",
-          "Specificity": "The answer is extremely vague. It mentions 'complicated context' and 'many stakeholders' but provides no concrete examples, actions taken, or constraints faced.",
-          "Business Impact": "It mentions 'the business continued to grow,' which is a vague positive outcome, but it provides no measurable evidence or specific link to the decision made."
+          "Relevance": "The answer addresses the prompt by describing a difficult decision, but lacks detail on the nature of the difficulty.",
+          "Structure": "The structure is very weak; it presents a sequence of events (consideration -> communication -> execution -> growth) without a clear narrative arc or deep dive into the decision-making process.",
+          "Specificity": "The answer is extremely vague. It mentions 'many stakeholders' and 'the situation' but provides no concrete examples of the decision, the stakeholders, or the constraints.",
+          "Business Impact": "The answer states 'the business continued to grow,' which is a vague outcome. It does not describe a specific, measurable customer, business, or operational outcome resulting directly from the difficult decision."
         },
         "feedback": {
           "strengths": [
-            "The answer is brief and directly addresses the prompt."
+            "The candidate acknowledges the presence of complexity and multiple stakeholders in the scenario."
           ],
           "improvements": [
-            "The answer lacks all necessary detail (context, specific decision, actions taken, measurable outcomes) required to demonstrate strong product management skills. It is too generic."
+            "The answer lacks any substance. It needs to clearly define the difficult decision itself (what was the choice?), the core conflict or trade-off, and the specific actions taken to resolve it. The vague statement about 'business continued to grow' needs to be replaced with a specific, measurable outcome related to the decision."
           ]
         },
-        "confidence": "medium"
+        "improved_answer_rewrite": "The difficult product decision involved [describe the specific product decision, e.g., whether to prioritize Feature A or Feature B]. The context was complicated because [describe the core conflict/trade-off, e.g., Feature A satisfied a high-value enterprise segment, while Feature B was needed for mass-market adoption]. I managed the many stakeholders by [describe specific communication/alignment action taken]. After the decision was made, the team executed the plan, resulting in [add the measured outcome related to the decision, e.g., a X% increase in adoption within the targeted segment].",
+        "confidence": "low"
       }
     }
   ]

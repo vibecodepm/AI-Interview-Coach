@@ -1,6 +1,6 @@
 # M2.4 Coaching Quality Evidence
 
-**Status:** Implementation complete; live-provider validation pending
+**Status:** Implementation and live-provider validation complete; release gate blocked
 **Date:** 2026-10-18
 **Prompt version:** `evaluation-v3`
 
@@ -23,12 +23,31 @@ The runner now records `evaluation-v3` so future calibration outputs cannot be c
 | Python compilation | PASS |
 | Existing contract tests | PASS — 3 tests |
 | Coaching prompt contract test | PASS |
-| Live Ollama validation | PENDING — Ollama was not reachable at `localhost:11434` during this run |
+| Live Ollama validation | PASS — 10 examples evaluated with `gemma4:latest` |
+| Rewrite persistence | PASS — all non-insufficient examples stored a rewrite |
+| Rewrite evidence integrity | FAIL — manual review found unsupported causal/context additions |
+
+## Live seed results
+
+The updated `evaluation-v3` prompt was run against the existing 10-example seed set:
+
+| Dimension | MAE | Adjacent agreement |
+|---|---:|---:|
+| Relevance | 0.90 | 100% |
+| Structure | 0.20 | 100% |
+| Specificity | 0.70 | 100% |
+| Business Impact | 1.60 | 40% |
+
+These are seed-baseline diagnostics, not a fresh holdout or a calibration release claim.
+
+## Coaching finding
+
+The model follows the placeholder instruction in some cases, especially for clearly generic answers such as `cal-007`, `cal-009`, and `cal-010`. However, it still paraphrases or adds unsupported context in other rewrites. Examples include inferring that a custom build would divert resources in `cal-001`, adding ownership and post-launch process details in `cal-002`, and asserting risk analysis or trade-offs not stated in `cal-005`.
 
 ## Release decision
 
-This milestone is complete as a code and contract hardening increment, but it is **not** evidence of calibrated coaching quality. Before treating it as release-ready, run the live provider on a fresh holdout and review rewrite evidence integrity, especially for answers without quantified impact.
+This milestone is complete as an implementation and validation increment, but it is **not release-ready**. The live run confirms that prompt instructions alone do not guarantee evidence-preserving rewrites. The product must continue to be positioned as AI-assisted practice feedback.
 
 ## Next action
 
-Start Ollama with the pinned evaluation model, run the calibration/holdout workflow, and capture examples where the rewrite uses a placeholder instead of inventing an outcome. Keep the product positioned as AI-assisted practice feedback until that review is complete.
+Add a deterministic rewrite-safety gate or a separate review-required state, then validate it on a fresh holdout with two independent human raters before making calibrated coaching claims.

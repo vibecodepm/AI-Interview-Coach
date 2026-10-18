@@ -172,5 +172,5 @@ These may become future standalone products.
 1. **M2.1 — Contract hardening:** ✅ Complete — validated schemas, error states, contract tests, API smoke tests, and frontend build verification.
 2. **M2.2 — Live provider path:** ✅ Complete with performance limitation — Ollama works end-to-end with JSON-schema validation; local answer-evaluation latency still exceeds the target.
 3. **M2.3 — Calibration:** human-rated dataset, holdout evaluation, agreement report, and failure analysis.
-4. **M2.4 — Coaching quality:** ✅ Implementation complete — evidence-grounded feedback and better-answer rewrites are contractually constrained; live holdout validation remains pending.
+4. **M2.4 — Coaching quality:** ✅ Implementation and live seed validation complete — evidence-grounded feedback and better-answer rewrites are contractually constrained; release remains blocked by rewrite-integrity findings and missing fresh-holdout review.
 5. **M2.5 — Personalization readiness:** resume/JD parsing only after evaluation reliability is measured.

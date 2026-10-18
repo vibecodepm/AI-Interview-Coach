@@ -40,6 +40,7 @@ def serialize_evaluation(result, provider="ollama"):
             "strengths": result.feedback.strengths,
             "improvements": result.feedback.improvements,
         },
+        "improved_answer_rewrite": result.improved_answer_rewrite,
         "confidence": result.confidence,
     }
 
