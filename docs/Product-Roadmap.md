@@ -108,7 +108,7 @@ Higher interview completion rate and improved question relevance.
 
 Prerequisite
 
-Phase 2 calibration and guardrails are complete.
+Phase 2 calibration and guardrails must meet the release gates. M2.4 implementation is complete, but rewrite-integrity findings and the missing fresh holdout currently keep Phase 3 blocked.
 
 ---
 

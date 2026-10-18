@@ -139,16 +139,21 @@ npm run dev
 
 ## 🎯 Next Steps (Prioritized)
 
-### Current Milestone: M2.3 — Evaluation Calibration
+### Current Milestone: M2.4 — Coaching Quality
 
 - [x] Configure and validate Ollama with `gemma4:latest`
 - [x] Verify structured output against the production response schemas
 - [x] Test provider timeout handling and strict dimension validation
 - [x] Record the local latency limitation
-- [ ] Build the human-rated calibration dataset
-- [ ] Compare live-model scores with human ratings
+- [x] Build and rate the ten-example seed calibration dataset
+- [x] Compare live-model scores with human ratings
+- [x] Add evidence-grounded coaching constraints and persist rewrites
+- [x] Run live `evaluation-v3` seed validation
+- [ ] Add deterministic rewrite-safety validation
+- [ ] Complete a fresh 50–100-example holdout with two independent raters
+- [ ] Meet the release thresholds for Business Impact agreement and evidence integrity
 
-After M2.2, proceed to evaluation calibration with human-rated answers.
+M2.4 implementation and seed validation are complete. The product remains AI-assisted practice feedback until the fresh holdout and rewrite-integrity gates pass.
 
 ### Priority 1: Evaluation Calibration (Highest Impact)
 - [ ] Build human-rated PM interview answer dataset (50-100 samples)
@@ -196,7 +201,7 @@ After M2.2, proceed to evaluation calibration with human-rated answers.
 | Phase | Timeline | Status |
 |-------|----------|--------|
 | **Phase 1: MVP Foundation** | Q3 2026 | ✅ **Complete** |
-| **Phase 2: AI Coaching** | Q4 2026 | 🔄 **In Progress** (M2.1 and M2.2 complete; M2.3 next) |
+| **Phase 2: AI Coaching** | Q4 2026 | 🔄 **In Progress** (M2.1–M2.4 implemented; release calibration gates remain) |
 | **Phase 3: Personalization** | Q1 2027 | ⏳ Planned |
 | **Phase 4: Growth** | Q2 2027 | ⏳ Planned |
 | **Phase 5: Scale** | Q3 2027+ | ⏳ Planned |
@@ -232,12 +237,11 @@ This project demonstrates:
 
 | # | Action | Effort | Impact |
 |---|--------|--------|--------|
-| 1 | Create evaluation calibration dataset | 2-4 hrs | **Highest leverage** — proves evaluation quality |
-| 2 | Compare live-model scores with human ratings | 2-4 hrs | Measures evaluator reliability |
-| 3 | Reduce provider latency | 2-4 hrs | Moves live evaluation toward production targets |
-| 4 | Add resume PDF parsing | 2-3 hrs | Enables true personalization |
-| 5 | Set up GitHub Actions CI | 1 hr | Engineering quality signal |
+| 1 | Add rewrite-safety gate and fresh holdout | 2-4 hrs | **Highest leverage** — closes the current release blocker |
+| 2 | Reduce provider latency | 2-4 hrs | Moves live evaluation toward production targets |
+| 3 | Add resume PDF parsing | 2-3 hrs | Enables true personalization after reliability gates |
+| 4 | Set up GitHub Actions CI | 1 hr | Engineering quality signal |
 
 ---
 
-**Bottom Line:** The MVP core loop, M2.1 contract hardening, and M2.2 live Ollama path are validated. The immediate next investment is evaluation calibration against human reviewers, while provider latency is reduced toward the product target.
+**Bottom Line:** The MVP core loop and M2.1–M2.4 implementation work are validated. The immediate next investment is a deterministic rewrite-safety gate and fresh human-rated holdout; calibrated scoring and personalization remain intentionally gated.

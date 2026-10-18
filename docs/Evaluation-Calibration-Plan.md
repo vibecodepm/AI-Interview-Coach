@@ -1,6 +1,6 @@
 # AI Interview Coach — Evaluation Calibration Plan
 
-**Status:** Proposed for Phase 2  
+**Status:** Active Phase 2 release plan; calibration gates not yet met
 **Owner:** AI First Product Manager
 
 ## Objective

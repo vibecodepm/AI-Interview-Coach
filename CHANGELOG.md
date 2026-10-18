@@ -1,3 +1,22 @@
+## M2.4 - Coaching Quality
+
+### Added
+- Evidence-grounded coaching constraints for feedback and improved-answer rewrites.
+- Explicit placeholders for missing metrics or outcomes.
+- Live `evaluation-v3` seed validation and persisted rewrite evidence.
+
+### Status
+- Implementation and seed validation complete; release remains blocked by rewrite-integrity findings and fresh-holdout requirements.
+
+## M2.3 - Calibration Baseline
+
+### Added
+- Ten-example human-rated seed dataset and live Ollama comparison tooling.
+- Per-dimension MAE and adjacent-agreement reporting.
+
+### Status
+- Diagnostic baseline only; not a calibrated release.
+
 ## v0.1.0 - Foundation
 
 ### Added

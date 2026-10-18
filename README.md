@@ -380,15 +380,15 @@ The final product loop was validated end-to-end rather than stopping at successf
 
 ## 🛣️ Next Product Iteration
 
-The highest-value next step is **evaluation calibration**, not simply adding more features.
+The highest-value next step is **rewrite-safety validation and fresh evaluation calibration**, not simply adding more features.
 
 Potential next iterations:
 
-1. Build a human-rated PM interview answer dataset.
-2. Compare AI scores with experienced interviewer scores.
-3. Measure score agreement and false positives/negatives.
-4. Improve evaluation prompts/rules based on observed gaps.
-5. Personalize questions using seniority, company, role and JD context.
+1. Add a deterministic safety gate for evidence-preserving rewrites.
+2. Build a fresh 50–100-example PM holdout with two independent raters.
+3. Compare AI scores with experienced interviewer scores.
+4. Measure score agreement and false positives/negatives.
+5. Personalize questions only after evaluation reliability passes its release gates.
 6. Track improvement across repeated interview attempts.
 
 The long-term product metric is:
@@ -406,7 +406,7 @@ Current limitations include:
 - no authentication
 - no persistent user history
 - limited question set for demonstration
-- evaluation calibration is still required against human reviewers
+- calibration release is still blocked by fresh-holdout and rewrite-integrity requirements
 - no voice interview
 - no recruiter dashboard
 - no longitudinal performance analytics
