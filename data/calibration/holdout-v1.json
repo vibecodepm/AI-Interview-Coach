@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "pm-interview-calibration-holdout-v1",
+  "split": "holdout",
+  "status": "awaiting_human_ratings",
+  "description": "Fresh holdout dataset for two-rater calibration. Add 50-100 new examples; do not copy the seed dataset.",
+  "rating_dimensions": [
+    "Relevance",
+    "Structure",
+    "Specificity",
+    "Business Impact"
+  ],
+  "examples": []
+}
