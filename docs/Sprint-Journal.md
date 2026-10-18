@@ -196,7 +196,7 @@ The implementation is complete, but live review found unsupported contextual add
 
 Sprint 11
 
-- Deterministic rewrite-safety gate
+- Deterministic numeric rewrite-safety gate — complete
 - Fresh holdout set with two independent human raters
 - Adjudication and release-gate decision
 

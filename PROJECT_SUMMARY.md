@@ -149,11 +149,11 @@ npm run dev
 - [x] Compare live-model scores with human ratings
 - [x] Add evidence-grounded coaching constraints and persist rewrites
 - [x] Run live `evaluation-v3` seed validation
-- [ ] Add deterministic rewrite-safety validation
+- [x] Add deterministic numeric rewrite-safety validation
 - [ ] Complete a fresh 50–100-example holdout with two independent raters
 - [ ] Meet the release thresholds for Business Impact agreement and evidence integrity
 
-M2.4 implementation and seed validation are complete. The product remains AI-assisted practice feedback until the fresh holdout and rewrite-integrity gates pass.
+M2.4 implementation and seed validation are complete. Numeric rewrite safety passes; the product remains AI-assisted practice feedback until semantic review and the fresh holdout gates pass.
 
 ### Priority 1: Evaluation Calibration (Highest Impact)
 - [ ] Build human-rated PM interview answer dataset (50-100 samples)

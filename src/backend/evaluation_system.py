@@ -243,4 +243,26 @@ Answer: {clean_text(user_answer)}
 Resume context (use only for relevance; do not invent evidence): {clean_text(resume_text)}
 Job-description context (use only for relevance; do not invent evidence): {clean_text(jd_text)}"""
         result = self._llm.call_structured(prompt, target_schema=AnswerScoreSchema)
+        result.improved_answer_rewrite = self._apply_rewrite_safety(
+            user_answer,
+            result.improved_answer_rewrite,
+        )
         return result
+
+    @staticmethod
+    def _apply_rewrite_safety(original_answer: str, rewrite: str) -> str:
+        """Replace numeric claims not present in the candidate answer.
+
+        This deterministic gate prevents a model rewrite from introducing
+        unsupported metrics, percentages, dates, or other numeric outcomes.
+        Missing evidence is represented as an explicit coaching placeholder.
+        """
+        original_numbers = set(re.findall(r"\b\d+(?:\.\d+)?%?\b", original_answer))
+
+        def replace_unknown(match: re.Match[str]) -> str:
+            token = match.group(0)
+            if token in original_numbers:
+                return token
+            return "[the missing metric or outcome]"
+
+        return re.sub(r"\b\d+(?:\.\d+)?%?\b", replace_unknown, rewrite or "")

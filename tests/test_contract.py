@@ -12,6 +12,14 @@ class CapturingLLMClient(MockLLMClient):
         return super().call_structured(prompt, target_schema)
 
 
+class UnsafeRewriteLLMClient(MockLLMClient):
+    def call_structured(self, prompt, target_schema):
+        result = super().call_structured(prompt, target_schema)
+        if target_schema is not list:
+            result.improved_answer_rewrite = "The result improved retention by 42% in 2025."
+        return result
+
+
 class ContractTests(unittest.TestCase):
     def setUp(self):
         self.engine = InterviewEvaluator(MockLLMClient())
@@ -58,6 +66,20 @@ class ContractTests(unittest.TestCase):
         self.assertIn("Never invent metrics", client.last_prompt)
         self.assertIn("bracketed prompt", client.last_prompt)
         self.assertIn("preserve the candidate's facts", client.last_prompt)
+
+    def test_rewrite_safety_replaces_unsupported_numeric_claims(self):
+        evaluator = InterviewEvaluator(UnsafeRewriteLLMClient())
+        result = evaluator.score_answer(
+            "Describe a product decision.",
+            "I reviewed customer feedback and changed the roadmap.",
+            "",
+            "",
+            "PM",
+        )
+
+        self.assertNotIn("42%", result.improved_answer_rewrite)
+        self.assertNotIn("2025", result.improved_answer_rewrite)
+        self.assertIn("[the missing metric or outcome]", result.improved_answer_rewrite)
 
 
 if __name__ == "__main__":

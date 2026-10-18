@@ -1,6 +1,6 @@
 # M2.4 Coaching Quality Evidence
 
-**Status:** Implementation and live-provider validation complete; release gate blocked
+**Status:** Rewrite-safety implementation and live seed validation complete; release gate blocked
 **Date:** 2026-10-18
 **Prompt version:** `evaluation-v3`
 
@@ -25,7 +25,8 @@ The runner now records `evaluation-v3` so future calibration outputs cannot be c
 | Coaching prompt contract test | PASS |
 | Live Ollama validation | PASS — 10 examples evaluated with `gemma4:latest` |
 | Rewrite persistence | PASS — all non-insufficient examples stored a rewrite |
-| Rewrite evidence integrity | FAIL — manual review found unsupported causal/context additions |
+| Numeric rewrite safety | PASS — no unsupported numeric tokens in 10 stored rewrites |
+| Semantic rewrite evidence integrity | REVIEW REQUIRED — deterministic numeric safety does not prove every paraphrase is fact-preserving |
 
 ## Live seed results
 
@@ -42,12 +43,12 @@ These are seed-baseline diagnostics, not a fresh holdout or a calibration releas
 
 ## Coaching finding
 
-The model follows the placeholder instruction in some cases, especially for clearly generic answers such as `cal-007`, `cal-009`, and `cal-010`. However, it still paraphrases or adds unsupported context in other rewrites. Examples include inferring that a custom build would divert resources in `cal-001`, adding ownership and post-launch process details in `cal-002`, and asserting risk analysis or trade-offs not stated in `cal-005`.
+The deterministic gate now removes unsupported numeric claims from rewrites. The live seed run produced zero numeric leakage across all ten examples. The gate does not prove that every non-numeric paraphrase is fact-preserving; examples such as `cal-001`, `cal-002`, and `cal-005` still require semantic review on the fresh holdout.
 
 ## Release decision
 
-This milestone is complete as an implementation and validation increment, but it is **not release-ready**. The live run confirms that prompt instructions alone do not guarantee evidence-preserving rewrites. The product must continue to be positioned as AI-assisted practice feedback.
+This milestone is complete as an implementation and seed-validation increment, but it is **not release-ready**. Numeric rewrite safety is enforced; the product must continue to be positioned as AI-assisted practice feedback until semantic review and the fresh human-rated holdout pass.
 
 ## Next action
 
-Add a deterministic rewrite-safety gate or a separate review-required state, then validate it on a fresh holdout with two independent human raters before making calibrated coaching claims.
+Validate semantic rewrite integrity on a fresh holdout with two independent human raters before making calibrated coaching claims.
