@@ -93,6 +93,7 @@ User feedback must not silently rewrite historical scores. Corrections should be
 - Versioned answer dataset (JSON or CSV)
 - Human-rating guide and adjudication log
 - Automated comparison script
+- Automated release-gate validator that fails closed when holdout or rater evidence is incomplete
 - Calibration report with metrics and error analysis
 - Updated evaluation prompt/rubric version
 - Release decision and known limitations

@@ -150,6 +150,7 @@ npm run dev
 - [x] Add evidence-grounded coaching constraints and persist rewrites
 - [x] Run live `evaluation-v3` seed validation
 - [x] Add deterministic numeric rewrite-safety validation
+- [x] Add a fail-closed holdout release-gate validator
 - [ ] Complete a fresh 50–100-example holdout with two independent raters
 - [ ] Meet the release thresholds for Business Impact agreement and evidence integrity
 
