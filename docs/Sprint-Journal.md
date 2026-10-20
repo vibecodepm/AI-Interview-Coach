@@ -198,6 +198,7 @@ Sprint 11
 
 - Deterministic numeric rewrite-safety gate — complete
 - Fail-closed holdout release-gate validator — complete
+- Learning-guidance UX contract — defined: explain the score, provide one to three actionable suggestions, and offer an optional evidence-grounded illustrative stronger answer without overwriting the original.
 - Fresh holdout set with two independent human raters
 - Adjudication and release-gate decision
 

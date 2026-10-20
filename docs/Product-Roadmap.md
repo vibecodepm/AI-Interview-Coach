@@ -77,6 +77,7 @@ Objectives
 - Human-rated calibration dataset
 - Prompt/model versioning
 - Evaluation confidence and guardrails
+- Optional learning guidance: actionable improvement suggestions and an evidence-grounded illustrative stronger answer
 - Provider error handling and observability
 
 Success Metric
@@ -173,4 +174,16 @@ These may become future standalone products.
 2. **M2.2 — Live provider path:** ✅ Complete with performance limitation — Ollama works end-to-end with JSON-schema validation; local answer-evaluation latency still exceeds the target.
 3. **M2.3 — Calibration:** human-rated dataset, holdout evaluation, agreement report, and failure analysis.
 4. **M2.4 — Coaching quality:** ✅ Implementation and live seed validation complete — deterministic numeric rewrite safety passes; release remains blocked by semantic rewrite review and missing fresh-holdout review.
-5. **M2.5 — Personalization readiness:** resume/JD parsing only after evaluation reliability is measured.
+5. **M2.5 — Learning guidance and personalization readiness:** learning guidance is defined as an optional post-score experience; resume/JD parsing starts only after evaluation reliability is measured.
+
+## Learning-guidance product behavior
+
+When an answer receives a low or moderate score, the product should teach rather than overwrite:
+
+- Show the score and concise, evidence-based reasons.
+- Show one to three actionable improvement suggestions.
+- Offer an optional “Example stronger answer” that is explicitly illustrative.
+- Preserve the candidate’s original answer unchanged and never invent metrics, outcomes, dates, or experiences.
+- Use placeholders for missing evidence instead of fabricating it.
+
+This experience is a coaching aid, not a replacement answer or a calibrated score. It must remain behind the evaluation confidence and rewrite-safety gates.

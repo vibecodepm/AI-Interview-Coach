@@ -142,6 +142,8 @@ Structured Feedback
 
 Priority: High
 
+Feedback must include concise evidence-based reasons and, when the answer needs improvement, one to three actionable suggestions. The system may offer an optional illustrative stronger answer, but it must preserve the original answer and must not invent metrics, outcomes, dates, or experiences. Missing evidence must be represented with a placeholder or explicit guidance to add it.
+
 ---
 
 ## FR-8
@@ -262,6 +264,7 @@ The MVP is successful when a user can:
 - Receive structured feedback
 - View interview summary
 - See evidence-based dimension scores and improvement guidance
+- See optional learning guidance with actionable suggestions and an illustrative stronger answer when appropriate
 - Receive a low-confidence indication when the answer lacks sufficient evidence
 - Continue safely when the AI provider times out or returns invalid structured output
 
